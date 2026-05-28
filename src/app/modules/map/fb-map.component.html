@@ -213,6 +213,18 @@
     </fb-tracks>
   }
 
+  <!-- KAHU Crowdsource Tracks -->
+  @if (kahuApiKey) {
+    <fb-kahu-tracks
+      [serverUrl]="kahuServerUrl"
+      [apiKey]="kahuApiKey"
+      [enabled]="true"
+      [lookbackDays]="183"
+      [zIndex]="105"
+    >
+    </fb-kahu-tracks>
+  }
+
   <!-- AIS target tracks -->
   @if (app.config.ui.showAisTargets && app.config.vessels.aisShowTrack) {
     <ais-targets-track

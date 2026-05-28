@@ -50,6 +50,7 @@ import { GeoUtils, Angle } from 'src/app/lib/geoutils';
 import { LineString, MultiLineString, Position } from 'src/app/types';
 
 import { AppFacade } from 'src/app/app.facade';
+import { KAHU_SERVER_URL, KAHU_API_KEY } from 'src/kahu-config';
 
 import {
   SKResourceService,
@@ -257,6 +258,9 @@ export class FBMapComponent implements OnInit, OnDestroy {
   private obsList = [];
 
   private http = inject(HttpClient);
+  protected kahuServerUrl = KAHU_SERVER_URL;
+  protected kahuApiKey = KAHU_API_KEY;
+
   protected app = inject(AppFacade);
   protected skres = inject(SKResourceService);
   protected skresOther = inject(FBCustomResourceService);

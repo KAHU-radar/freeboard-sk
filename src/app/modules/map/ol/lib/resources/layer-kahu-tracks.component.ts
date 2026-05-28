@@ -186,6 +186,15 @@ export class KahuTracksLayerComponent implements OnInit, OnDestroy, OnChanges {
     const extent3857 = view.calculateExtent(size);
     const extent4326 = transformExtent(extent3857, 'EPSG:3857', 'EPSG:4326');
 
+    // Server rejects bounding boxes wider/taller than 60°. Skip the request
+    // and clear stale features when zoomed out too far (e.g. world view).
+    const spanX = extent4326[2] - extent4326[0];
+    const spanY = extent4326[3] - extent4326[1];
+    if (spanX > 50 || spanY > 50) {
+      this.source.clear();
+      return;
+    }
+
     // Cancel any in-flight request before starting a new one.
     this.abortController?.abort();
     this.abortController = new AbortController();
